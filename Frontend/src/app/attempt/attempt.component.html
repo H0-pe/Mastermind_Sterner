@@ -1,0 +1,13 @@
+<div class="dropdown">
+  <button [ngClass]="!selectedColor ? 'btn btn-secondary dropdown-toggle': 'btn btn-secondary'"
+          data-bs-toggle="dropdown" aria-expanded="false"
+          id="dropdownMenuButton1"
+          [ngStyle]="{'background-color': !selectedColor ? 'none' : selectedColor, 'color': !selectedColor ? 'none' : selectedColor}">
+    Choose a color
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngIf="!selectedColor">
+    <li *ngFor="let color of availableColors" (click)="onColorSelected(color)"><a href="#"
+                                                                                  class="dropdown-item">{{color}}</a>
+    </li>
+  </ul>
+</div>

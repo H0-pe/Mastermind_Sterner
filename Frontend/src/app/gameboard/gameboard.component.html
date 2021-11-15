@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>Hi {{game.name}}! Your game ID is {{game.gameId}}</h2>
+
+  <div *ngFor="let attempt of attempts; let i = index" class="row m-3">
+    <div class="col">
+      <h5>{{i+1}}. Attempt ({{game.nrOfTries - (i+1)}} left): </h5>
+    </div>
+    <div class="col">
+      <app-attempt [availableColors]="availableColors" (colorSelected)="colorSelected(1,$event)" [selectedColor]="getColorOfAttempt(attempt,0)"></app-attempt>
+    </div>
+    <div class="col">
+      <app-attempt [availableColors]="availableColors" (colorSelected)="colorSelected(2,$event)" [selectedColor]="getColorOfAttempt(attempt,1)"></app-attempt>
+    </div>
+    <div class="col">
+      <app-attempt [availableColors]="availableColors" (colorSelected)="colorSelected(3,$event)" [selectedColor]="getColorOfAttempt(attempt,2)"></app-attempt>
+    </div>
+    <div class="col">
+      <app-attempt [availableColors]="availableColors" (colorSelected)="colorSelected(4,$event)" [selectedColor]="getColorOfAttempt(attempt,3)"></app-attempt>
+    </div>
+    <div class="col">
+      <button class="btn btn-primary" [disabled]="!colorsGroup.valid" (click)="submitAttempt(i)"
+              *ngIf="!attempt.attemptResult">Submit attempt
+      </button>
+      <div *ngIf="attempt.attemptResult">
+        <p>Correct color: <span class="bg-primary">{{attempt.attemptResult.correctColors}}</span></p>
+        <p>Correct color and position: <span class="bg-success">{{attempt.attemptResult.correctPositions}}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <h2 *ngIf="wonGame">Great, you have solved the pattern :)</h2>
+  <h2 *ngIf="lostGame">Sorry, no more tries left :(</h2>
+</div>
